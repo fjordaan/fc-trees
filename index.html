@@ -77,7 +77,8 @@
         }
 
         /* Show shapes and labels on hover for groups */
-        svg:hover g > circle {
+        svg:hover g > circle,
+        svg:hover g > path {
           stroke: #fff;
           stroke-width: 2;
         }
@@ -124,9 +125,9 @@
 </head>
 <body>
     <div class="container">
-        <h1>Fulham Cemetery Tree Map</h1>
+        <h1>Fulham Cemetery Trees</h1>
         <div class="intro">
-            <p>[Introductory paragraph will be added here]</p>
+            <p>Aerial photo from Google Maps, with trees highlighted on mouseover.</p>
         </div>
 
         <div id="map-container">
