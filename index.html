@@ -46,6 +46,11 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             overflow: hidden;
         }
+        @media screen and (width <= 960px) {
+          #map-container {
+            width: 200%;
+          }
+        }
 
         #map-container svg {
             width: 100%;
@@ -131,7 +136,7 @@
     <div class="container">
         <h1>Fulham Cemetery Trees</h1>
         <div class="intro">
-            <p>Aerial photo from Google Maps, with trees highlighted on mouseover.</p>
+            <p>Aerial photo from Google Maps, with trees highlighted on mouseover or tap.</p>
         </div>
 
         <div id="map-container">
