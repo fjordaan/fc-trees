@@ -85,20 +85,24 @@
 
         svg g:hover > circle,
         svg g:hover > path,
-        svg g:hover > text {
+        svg g:hover > text,
+        svg g.highlight > circle,
+        svg g.highlight > path,
+        svg g.highlight > text {
             opacity: 1;
         }
 
         /* Style for tree shapes when visible */
         svg g:hover > circle,
-        svg g:hover > path {
+        svg g:hover > path,
+        svg g.highlight > circle,
+        svg g.highlight > path {
             fill: rgba(255, 255, 255, 0.6);
-            stroke: #fff;
-            stroke-width: 2;
         }
 
         /* Style for text labels when visible */
-        svg g:hover > text {
+        svg g:hover > text,
+        svg g.highlight > text {
             fill: #000;
             font-weight: bold;
             paint-order: stroke fill;
@@ -420,6 +424,54 @@
         </div>
     </div>
 
+<script>
+const svg = document.getElementById('map');
+let lastHighlighted = null;
+
+// Helper to clear highlight
+function clearHighlight() {
+  if (lastHighlighted) {
+    lastHighlighted.classList.remove('highlight');
+    lastHighlighted = null;
+  }
+}
+
+// Find the region under the finger and highlight it
+function highlightFromEvent(e) {
+  // Get the element under the pointer
+  const el = document.elementFromPoint(e.clientX, e.clientY);
+  if (!el) return;
+
+  const region = el.closest('.region');
+
+  if (region !== lastHighlighted) {
+    clearHighlight();
+    if (region) {
+      region.classList.add('highlight');
+      lastHighlighted = region;
+    }
+  }
+}
+
+// Start tracking on touch/pointer down
+svg.addEventListener('pointerdown', (e) => {
+  if (e.pointerType === 'touch' || e.pointerType === 'pen') {
+    highlightFromEvent(e);
+  }
+});
+
+// Update highlight as the finger moves around
+svg.addEventListener('pointermove', (e) => {
+  if (e.pointerType === 'touch' || e.pointerType === 'pen') {
+    highlightFromEvent(e);
+  }
+});
+
+// Clear highlight when finger lifts or gesture cancels
+svg.addEventListener('pointerup', clearHighlight);
+svg.addEventListener('pointercancel', clearHighlight);
+
+</script>
 
 </body>
 </html>
