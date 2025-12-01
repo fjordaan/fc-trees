@@ -182,42 +182,46 @@
 
           <div class="toc">
             <ul>
-              <li class="ailanthus">Ailanthus</li>
-              <li class="ash">Ash</li>
-              <li class="cedar">Cedar</li>
-              <li class="cherry">Cherry</li>
-              <li class="crabapple">Crabapple</li>
-              <li class="cypress">Cypress</li>
-              <li class="elder">Elder</li>
-              <li class="hawthorn">Hawthorn</li>
-              <li class="himalayan-cedar">Himalayan cedar</li>
-              <li class="holm-oak">Holm oak</li>
-              <li class="hornbeam">Hornbeam</li>
-              <li class="horse-chestnut">Horse chestnut</li>
-              <li class="japanese-cherry">Japanese cherry</li>
-              <li class="snowball-bushes">Japanese snowball bushes</li>
-              <li class="juniper">Juniper</li>
-              <li class="lime-limes">Lime</li>
-              <li class="london-plane">London Plane</li>
-              <li class="magnolia">Magnolia</li>
-              <li class="maple">Maple</li>
-              <li class="medlar">Medlar</li>
-              <li class="norway">Norway maple 'Schwedleri'</li>
-              <li class="oak">Oak</li>
-              <li class="pine-pines">Pine</li>
-              <li class="poplars">Poplars</li>
-              <li class="purple-plum">Purple plum</li>
-              <li class="redwood">Redwood</li>
-              <li class="rowan">Rowan</li>
-              <li class="birch">Silver birch</li>
-              <li class="maple">Silver maple</li>
-              <li class="sweetgum-liquidambar">Sweetgum / Liquidambar</li>
-              <li class="sycamore-sycamores">Sycamore</li>
-              <li class="weeping-ash">Weeping ash</li>
-              <li class="wild-plum">Wild plum</li>
-              <li class="winter">Winter flowering cherry</li>
-              <li class="yew">Yew</li>
-              <li class="zelkova-serrata">Zelkova serrata</li>
+              <li tabindex="0" class="ailanthus">Ailanthus</li>
+              <li tabindex="0" class="ash">Ash</li>
+              <li tabindex="0" class="cedar">Cedar</li>
+              <li tabindex="0" class="cherry">Cherry</li>
+              <li tabindex="0" class="crabapple">Crabapple</li>
+              <li tabindex="0" class="cypress">Cypress</li>
+              <li tabindex="0" class="elder">Elder</li>
+              <li tabindex="0" class="europeancrabapple">European crabapple</li>
+              <li tabindex="0" class="hallcrabapple">Hall crabapple</li>
+              <li tabindex="0" class="hawthorn">Hawthorn</li>
+              <li tabindex="0" class="cedar himalayancedar">Himalayan cedar</li>
+              <li tabindex="0" class="holmoak">Holm oak</li>
+              <li tabindex="0" class="hornbeam">Hornbeam</li>
+              <li tabindex="0" class="horse-chestnut">Horse chestnut</li>
+              <li tabindex="0" class="japanesecherry">Japanese cherry</li>
+              <li tabindex="0" class="snowball-bushes">Japanese snowball bushes</li>
+              <li tabindex="0" class="juniper">Juniper</li>
+              <li tabindex="0" class="lime limes">Lime</li>
+              <li tabindex="0" class="london-plane">London Plane</li>
+              <li tabindex="0" class="magnolia">Magnolia</li>
+              <li tabindex="0" class="maple">Maple</li>
+              <li tabindex="0" class="medlar">Medlar</li>
+              <li tabindex="0" class="norwaymaple">Norway maple 'Schwedleri'</li>
+              <li tabindex="0" class="oak">Oak</li>
+              <li tabindex="0" class="pine-pines">Pine</li>
+              <li tabindex="0" class="plum">Plum</li>
+              <li tabindex="0" class="poplars">Poplars</li>
+              <li tabindex="0" class="purpleplum">Purple plum</li>
+              <li tabindex="0" class="redwood">Redwood</li>
+              <li tabindex="0" class="rowan">Rowan</li>
+              <li tabindex="0" class="scarletcrabapple">Scarletcrabapple</li>
+              <li tabindex="0" class="silverbirch">Silver birch</li>
+              <li tabindex="0" class="silvermaple">Silver maple</li>
+              <li tabindex="0" class="sweetgum-liquidambar">Sweetgum / Liquidambar</li>
+              <li tabindex="0" class="sycamore sycamores">Sycamore</li>
+              <li tabindex="0" class="weepingash">Weeping ash</li>
+              <li tabindex="0" class="wildplum">Wild plum</li>
+              <li tabindex="0" class="winterfloweringcherry">Winter flowering cherry</li>
+              <li tabindex="0" class="yew">Yew</li>
+              <li tabindex="0" class="zelkova-serrata">Zelkova serrata</li>
             </ul>
 
           </div>
@@ -662,7 +666,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const tocItems = document.querySelectorAll('.toc li');
   const map = document.getElementById('map');
   if (!map || !tocItems.length) return;
-
   const groups = Array.from(map.querySelectorAll('g'));
   let activeLi = null; // li selected by tap/click
 
@@ -692,9 +695,7 @@ document.addEventListener('DOMContentLoaded', () => {
       clearHighlights();
       return;
     }
-
     clearHighlights();
-
     groups.forEach(g => {
       const gWords = groupWordMap.get(g);
       for (const w of liWords) {
@@ -724,9 +725,45 @@ document.addEventListener('DOMContentLoaded', () => {
       activeLi = li;
       highlightForLi(li);
     });
+
+    // Focus (keyboard navigation)
+    li.addEventListener('focus', () => {
+      highlightForLi(li);
+    });
+
+    // Blur (when focus leaves)
+    li.addEventListener('blur', () => {
+      // Only clear if this item isn't the active (clicked) one
+      if (activeLi !== li) {
+        clearHighlights();
+      }
+    });
+
+    // Arrow key navigation
+    li.addEventListener('keydown', (e) => {
+      const currentIndex = Array.from(tocItems).indexOf(li);
+      let nextIndex = -1;
+
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        nextIndex = currentIndex + 1;
+        if (nextIndex >= tocItems.length) {
+          nextIndex = 0; // Wrap to first item
+        }
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        nextIndex = currentIndex - 1;
+        if (nextIndex < 0) {
+          nextIndex = tocItems.length - 1; // Wrap to last item
+        }
+      }
+
+      if (nextIndex !== -1) {
+        tocItems[nextIndex].focus();
+      }
+    });
   });
 });
-
 </script>
 
 </body>
