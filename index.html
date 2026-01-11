@@ -171,6 +171,109 @@
           background: rgba(0,0,0,0.5);
           cursor: pointer;
         }
+
+        /* Toggle switch styles */
+        .toggle-container {
+          position: absolute;
+          top: 10px;
+          left: 10px;
+          z-index: 10;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          background: rgba(0,0,0,0.5);
+          padding: 8px 12px;
+          border-radius: 4px;
+          border: 1px solid rgba(255,255,255,0.7);
+        }
+        .toggle-label {
+          color: #fff;
+          font-size: 12px;
+          font-weight: 600;
+        }
+        .toggle-switch {
+          position: relative;
+          width: 44px;
+          height: 24px;
+        }
+        .toggle-switch input {
+          opacity: 0;
+          width: 0;
+          height: 0;
+        }
+        .toggle-slider {
+          position: absolute;
+          cursor: pointer;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: #4a7c4e;
+          transition: 0.3s;
+          border-radius: 24px;
+        }
+        .toggle-slider:before {
+          position: absolute;
+          content: "";
+          height: 18px;
+          width: 18px;
+          left: 3px;
+          bottom: 3px;
+          background-color: white;
+          transition: 0.3s;
+          border-radius: 50%;
+        }
+        .toggle-switch input:checked + .toggle-slider {
+          background-color: #c47a4e;
+        }
+        .toggle-switch input:checked + .toggle-slider:before {
+          transform: translateX(20px);
+        }
+
+        /* TOC2 shares TOC styles */
+        .toc2 {
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          width: 200px;
+          bottom: 10px;
+          overflow: auto;
+          background: rgba(0,0,0,0.5);
+          border: 1px solid rgba(255,255,255,0.7);
+          border-radius: 4px;
+          scrollbar-color: grey transparent;
+          scrollbar-width: thin;
+        }
+        .toc2 ul {
+          list-style: none;
+          padding: 0;
+          margin: 10px 0;
+        }
+        .toc2 li {
+          padding: 2px 10px;
+          margin: 0;
+          font-size: 12px;
+          color: #fff;
+        }
+        .toc2 li:hover {
+          background: rgba(0,0,0,0.5);
+          cursor: pointer;
+        }
+
+        /* Map/TOC visibility - default state (existing trees) */
+        #map2, .toc2 {
+          display: none;
+        }
+
+        /* When toggle is checked, show new trees, hide existing */
+        #map-container.show-new #map,
+        #map-container.show-new .toc {
+          display: none;
+        }
+        #map-container.show-new #map2,
+        #map-container.show-new .toc2 {
+          display: block;
+        }
     </style>
 </head>
 <body>
@@ -183,6 +286,15 @@
       </header>
 
         <div id="map-container">
+
+          <div class="toggle-container">
+            <span class="toggle-label">Existing Trees</span>
+            <label class="toggle-switch">
+              <input type="checkbox" id="map-toggle">
+              <span class="toggle-slider"></span>
+            </label>
+            <span class="toggle-label">New Trees</span>
+          </div>
 
           <div class="toc">
             <ul>
@@ -233,6 +345,21 @@
               <li tabindex="0" class="winterfloweringcherry">Winter flowering cherry</li>
               <li tabindex="0" class="yew">Yew</li>
               <li tabindex="0" class="zelkova-serrata">Zelkova serrata</li>
+            </ul>
+
+          </div>
+		  
+		  <div class="toc2">
+            <ul>
+              <li tabindex="0" class="birch">Birch</li>
+              <li tabindex="0" class="cedar">Cedar</li>
+              <li tabindex="0" class="cherry">Cherry</li>
+              <li tabindex="0" class="crabapple">Crabapple</li>
+              <li tabindex="0" class="europeancrabapple">European crabapple</li>
+              <li tabindex="0" class="cedar himalayancedar">Himalayan cedar</li>
+              <li tabindex="0" class="japanesecherry">Japanese cherry</li>
+              <li tabindex="0" class="japanesecherrykanzan">Japanese cherry 'Kanzan'</li>
+              <li tabindex="0" class="japanesecherrytaihaku">Japanese cherry 'Tai Haku'</li>
             </ul>
 
           </div>
@@ -723,9 +850,55 @@
           </g>
           </svg>
 
+<svg id="map2" width="1280" height="677" viewBox="0 0 1280 677" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="FC tree map - new trees">
+<rect width="1280" height="677" fill="white"/>
+<g id="cherry Japanesecherry JapaneseCherryKanzan">
+<circle id="tree" opacity="0.5" cx="745.5" cy="204.5" r="3.5" fill="#FF0000"/>
+<circle id="tree_2" opacity="0.5" cx="761.5" cy="201.5" r="3.5" fill="#FF0000"/>
+<circle id="tree_3" opacity="0.5" cx="778.5" cy="198.5" r="3.5" fill="#FF0000"/>
+<text id="label" fill="black" xml:space="preserve" style="white-space: pre" font-family="Nunito" font-size="8" font-weight="bold" letter-spacing="0em"><tspan x="723.254" y="214.132">Japanese cherry &#x2018;Kanzan&#x2019;</tspan></text>
+</g>
+<g id="cherry Japanesecherry JapaneseCherryKanzan_2">
+<circle id="tree_4" opacity="0.5" cx="884.5" cy="373.5" r="3.5" fill="#FF0000"/>
+<circle id="tree_5" opacity="0.5" cx="897.5" cy="372.5" r="3.5" fill="#FF0000"/>
+<circle id="tree_6" opacity="0.5" cx="909.5" cy="375.5" r="3.5" fill="#FF0000"/>
+<text id="label_2" fill="black" xml:space="preserve" style="white-space: pre" font-family="Nunito" font-size="8" font-weight="bold" letter-spacing="0em"><tspan x="858.254" y="385.132">Japanese cherry &#x2018;Kanzan&#x2019;</tspan></text>
+</g>
+<g id="Cedar AtlasCedar Atlantica">
+<circle id="tree_7" opacity="0.5" cx="729.5" cy="373.5" r="3.5" fill="#FF0000"/>
+<text id="label_3" fill="black" xml:space="preserve" style="white-space: pre" font-family="Nunito" font-size="8" font-weight="bold" letter-spacing="0em"><tspan x="708.324" y="386.132">Atlas cedar</tspan></text>
+</g>
+<g id="Cedar HimalayanCedar Deodara">
+<circle id="tree_8" opacity="0.5" cx="705.5" cy="376.5" r="3.5" fill="#FF0000"/>
+<text id="label_4" fill="black" xml:space="preserve" style="white-space: pre" font-family="Nunito" font-size="8" font-weight="bold" letter-spacing="0em"><tspan x="674.398" y="389.132">Himalayan cedar</tspan></text>
+</g>
+<g id="Cedar HimalayanCedar Deodara_2">
+<circle id="tree_9" opacity="0.5" cx="710.5" cy="396.5" r="3.5" fill="#FF0000"/>
+<circle id="tree_10" opacity="0.5" cx="702.5" cy="469.5" r="3.5" fill="#FF0000"/>
+<circle id="tree_11" opacity="0.5" cx="715.5" cy="492.5" r="3.5" fill="#FF0000"/>
+<text id="label_5" fill="black" xml:space="preserve" style="white-space: pre" font-family="Nunito" font-size="8" font-weight="bold" letter-spacing="0em"><tspan x="663.473" y="409.132">Japanese cherry &#x2018;Yoshino&#x2019;</tspan></text>
+</g>
+<g id="crabapple EuropeanCrabapple sylvestris">
+<circle id="tree_12" opacity="0.5" cx="646.5" cy="339.5" r="3.5" fill="#FF0000"/>
+<text id="label_6" fill="black" xml:space="preserve" style="white-space: pre" font-family="Nunito" font-size="8" font-weight="bold" letter-spacing="0em"><tspan x="609.348" y="352.132">European crabapple</tspan></text>
+</g>
+<g id="crabapple EuropeanCrabapple sylvestris_2">
+<circle id="tree_13" opacity="0.5" cx="482.5" cy="361.5" r="3.5" fill="#FF0000"/>
+<text id="label_7" fill="black" xml:space="preserve" style="white-space: pre" font-family="Nunito" font-size="8" font-weight="bold" letter-spacing="0em"><tspan x="445.348" y="374.132">European crabapple</tspan></text>
+</g>
+<g id="birch SilverBirch">
+<circle id="tree_14" opacity="0.5" cx="661.5" cy="334.5" r="3.5" fill="#FF0000"/>
+<circle id="tree_15" opacity="0.5" cx="660.5" cy="345.5" r="3.5" fill="#FF0000"/>
+<text id="label_8" fill="black" xml:space="preserve" style="white-space: pre" font-family="Nunito" font-size="8" font-weight="bold" letter-spacing="0em"><tspan x="641.16" y="358.132">Silver birch</tspan></text>
+</g>
+</g>
+</svg>
+
 
         </div>
     </div>
+	
 
 <script>
 const svg = document.getElementById('map');
@@ -777,13 +950,19 @@ svg.addEventListener('pointercancel', clearHighlight);
 </script>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const tocItems = document.querySelectorAll('.toc li');
-  const map = document.getElementById('map');
-  if (!map || !tocItems.length) return;
-  const groups = Array.from(map.querySelectorAll('g'));
-  let activeLi = null; // li selected by tap/click
+// Toggle between existing trees and new trees
+document.getElementById('map-toggle').addEventListener('change', function() {
+  const container = document.getElementById('map-container');
+  if (this.checked) {
+    container.classList.add('show-new');
+  } else {
+    container.classList.remove('show-new');
+  }
+});
+</script>
 
+<script>
+document.addEventListener('DOMContentLoaded', () => {
   // Helper: split into lowercase words using space, hyphen or underscore
   function getWords(str) {
     if (!str) return [];
@@ -793,91 +972,103 @@ document.addEventListener('DOMContentLoaded', () => {
       .filter(Boolean);
   }
 
-  // Precompute word sets for each <g>
-  const groupWordMap = new Map();
-  groups.forEach(g => {
-    const id = g.id || '';
-    groupWordMap.set(g, new Set(getWords(id)));
-  });
+  // Setup TOC interaction for a given toc selector and map id
+  function setupToc(tocSelector, mapId) {
+    const tocItems = document.querySelectorAll(tocSelector + ' li');
+    const map = document.getElementById(mapId);
+    if (!map || !tocItems.length) return;
+    const groups = Array.from(map.querySelectorAll('g'));
+    let activeLi = null;
 
-  function clearHighlights() {
-    groups.forEach(g => g.classList.remove('highlight'));
-  }
-
-  function highlightForLi(li) {
-    const liWords = new Set(getWords(li.className));
-    if (!liWords.size) {
-      clearHighlights();
-      return;
-    }
-    clearHighlights();
+    // Precompute word sets for each <g>
+    const groupWordMap = new Map();
     groups.forEach(g => {
-      const gWords = groupWordMap.get(g);
-      for (const w of liWords) {
-        if (gWords.has(w)) {
-          g.classList.add('highlight');
-          break;
-        }
+      const id = g.id || '';
+      groupWordMap.set(g, new Set(getWords(id)));
+    });
+
+    function clearHighlights() {
+      groups.forEach(g => g.classList.remove('highlight'));
+    }
+
+    function highlightForLi(li) {
+      const liWords = new Set(getWords(li.className));
+      if (!liWords.size) {
+        clearHighlights();
+        return;
       }
+      clearHighlights();
+      groups.forEach(g => {
+        const gWords = groupWordMap.get(g);
+        for (const w of liWords) {
+          if (gWords.has(w)) {
+            g.classList.add('highlight');
+            break;
+          }
+        }
+      });
+    }
+
+    tocItems.forEach(li => {
+      // Hover (desktop)
+      li.addEventListener('mouseenter', () => {
+        highlightForLi(li);
+      });
+
+      // Always clear on mouseleave — ignoring taps
+      li.addEventListener('mouseleave', () => {
+        clearHighlights();
+        activeLi = null;
+      });
+
+      // Tap / click (mobile & desktop)
+      li.addEventListener('click', (e) => {
+        e.preventDefault();
+        activeLi = li;
+        highlightForLi(li);
+      });
+
+      // Focus (keyboard navigation)
+      li.addEventListener('focus', () => {
+        highlightForLi(li);
+      });
+
+      // Blur (when focus leaves)
+      li.addEventListener('blur', () => {
+        if (activeLi !== li) {
+          clearHighlights();
+        }
+      });
+
+      // Arrow key navigation
+      li.addEventListener('keydown', (e) => {
+        const currentIndex = Array.from(tocItems).indexOf(li);
+        let nextIndex = -1;
+
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          nextIndex = currentIndex + 1;
+          if (nextIndex >= tocItems.length) {
+            nextIndex = 0;
+          }
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          nextIndex = currentIndex - 1;
+          if (nextIndex < 0) {
+            nextIndex = tocItems.length - 1;
+          }
+        }
+
+        if (nextIndex !== -1) {
+          tocItems[nextIndex].focus();
+        }
+      });
     });
   }
 
-  tocItems.forEach(li => {
-    // Hover (desktop)
-    li.addEventListener('mouseenter', () => {
-      highlightForLi(li);
-    });
-
-    // Always clear on mouseleave — ignoring taps
-    li.addEventListener('mouseleave', () => {
-      clearHighlights();
-      activeLi = null; // also clear "tapped" state
-    });
-
-    // Tap / click (mobile & desktop)
-    li.addEventListener('click', (e) => {
-      e.preventDefault();
-      activeLi = li;
-      highlightForLi(li);
-    });
-
-    // Focus (keyboard navigation)
-    li.addEventListener('focus', () => {
-      highlightForLi(li);
-    });
-
-    // Blur (when focus leaves)
-    li.addEventListener('blur', () => {
-      // Only clear if this item isn't the active (clicked) one
-      if (activeLi !== li) {
-        clearHighlights();
-      }
-    });
-
-    // Arrow key navigation
-    li.addEventListener('keydown', (e) => {
-      const currentIndex = Array.from(tocItems).indexOf(li);
-      let nextIndex = -1;
-
-      if (e.key === 'ArrowDown') {
-        e.preventDefault();
-        nextIndex = currentIndex + 1;
-        if (nextIndex >= tocItems.length) {
-          nextIndex = 0; // Wrap to first item
-        }
-      } else if (e.key === 'ArrowUp') {
-        e.preventDefault();
-        nextIndex = currentIndex - 1;
-        if (nextIndex < 0) {
-          nextIndex = tocItems.length - 1; // Wrap to last item
-        }
-      }
-
-      if (nextIndex !== -1) {
-        tocItems[nextIndex].focus();
-      }
-    });
-  });
+  // Setup both TOCs
+  setupToc('.toc', 'map');
+  setupToc('.toc2', 'map2');
 });
 </script>
 
